@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع المسلم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c5e8a;
+            --secondary-color: #3a9ad9;
+            --accent-color: #e6b31e;
+            --light-color: #f5f5f5;
+            --dark-color: #333;
+            --prayer-time-bg: #2c5e8a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rubik', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .date-display {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .prayer-times {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            padding: 15px;
+            background-color: white;
+        }
+        
+        .prayer-card {
+            background-color: var(--prayer-time-bg);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .prayer-card.active {
+            background-color: var(--accent-color);
+            transform: scale(1.05);
+        }
+        
+        .prayer-name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .prayer-time {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background-color: white;
+        }
+        
+        .feature-card {
+            background-color: var(--light-color);
+            border-radius: 10px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .feature-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 15px;
+            background-color: white;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-item {
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .nav-icon {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+        
+        .nav-text {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .hijri-date {
+            font-size: 14px;
+            margin-top: 5px;
+            color: #e6b31e;
+        }
+        
+        /* نمط الإشعارات */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 300px;
+            animation: slideIn 0.5s forwards;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .notification-close {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>موقع المسلم</h1>
+            <div class="hijri-date">26 شَوّال 1446 هـ - الخميس</div>
+        </header>
+        
+        <div class="date-display">
+            24 أبريل 2025 - المنوفية، مصر
+        </div>
+        
+        <div class="prayer-times">
+            <div class="prayer-card">
+                <div class="prayer-name">الفجر</div>
+                <div class="prayer-time">03:45</div>
+            </div>
+            <div class="prayer-card">
+                <div class="prayer-name">الشروق</div>
+                <div class="prayer-time">05:19</div>
+            </div>
+            <div class="prayer-card">
+                <div class="prayer-name">الظهر</div>
+                <div class="prayer-time">11:54</div>
+            </div>
+            <div class="prayer-card">
+                <div class="prayer-name">العصر</div>
+                <div class="prayer-time">15:31</div>
+            </div>
+            <div class="prayer-card">
+                <div class="prayer-name">المغرب</div>
+                <div class="prayer-time">18:30</div>
+            </div>
+            <div class="prayer-card">
+                <div class="prayer-name">العشاء</div>
+                <div class="prayer-time">19:53</div>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card" onclick="window.location.href='azkar.html?type=morning'">
+                <div class="feature-icon"><i class="fas fa-sun"></i></div>
+                <div class="feature-name">أذكار الصباح</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='masaa.html?type=evening'">
+                <div class="feature-icon"><i class="fas fa-moon"></i></div>
+                <div class="feature-name">أذكار المساء</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='noom.html?type=sleep'">
+                <div class="feature-icon"><i class="fas fa-bed"></i></div>
+                <div class="feature-name">أذكار النوم</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='up.html?type=wakeup'">
+                <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                <div class="feature-name">أذكار الاستيقاظ</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='salah.html?type=prayer'">
+                <div class="feature-icon"><i class="fas fa-pray"></i></div>
+                <div class="feature-name">أذكار بعد الصلاة</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='qibla.html'">
+                <div class="feature-icon"><i class="fas fa-compass"></i></div>
+                <div class="feature-name">اتجاه القبلة</div>
+            </div>
+        </div>
+        
+        <div class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='share.html'">
+                <div class="nav-icon"><i class="fas fa-share-alt"></i></div>
+                <div class="nav-text">شارك التطبيق</div>
+            </div>
+            <div class="nav-item" onclick="window.location.href='settings.html'">
+                <div class="nav-icon"><i class="fas fa-cog"></i></div>
+                <div class="nav-text">الإعدادات</div>
+            </div>
+            <div class="nav-item" onclick="window.location.href='about.html'">
+                <div class="nav-icon"><i class="fas fa-info-circle"></i></div>
+                <div class="nav-text">عن التطبيق</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- عنصر الإشعار -->
+    <div class="notification" id="prayerNotification">
+        <span class="notification-close" onclick="closeNotification()">×</span>
+        <div class="notification-title" id="notificationTitle">إشعار الصلاة</div>
+        <div id="notificationMessage">اقتربت صلاة الفجر قبلها بربع ساعة</div>
+    </div>
+    
+    <script>
+        // دالة لجلب مواقيت الصلاة من API
+        async function fetchPrayerTimes() {
+            try {
+                const response = await fetch('https://alquran.vip/APIs/getPrayerTimes');
+                const data = await response.json();
+                
+                // تحديث التاريخ الميلادي
+                const now = new Date();
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = now.toLocaleDateString('ar-EG', options);
+                document.querySelector('.date-display').textContent = 
+                    `${formattedDate} - ${data.region}، ${data.country === 'EG' ? 'مصر' : data.country}`;
+                
+                // تحديث مواقيت الصلاة
+                const prayers = data.prayer_times;
+                document.querySelectorAll('.prayer-card')[0].querySelector('.prayer-time').textContent = prayers.Fajr;
+                document.querySelectorAll('.prayer-card')[1].querySelector('.prayer-time').textContent = prayers.Sunrise;
+                document.querySelectorAll('.prayer-card')[2].querySelector('.prayer-time').textContent = prayers.Dhuhr;
+                document.querySelectorAll('.prayer-card')[3].querySelector('.prayer-time').textContent = prayers.Asr;
+                document.querySelectorAll('.prayer-card')[4].querySelector('.prayer-time').textContent = prayers.Maghrib;
+                document.querySelectorAll('.prayer-card')[5].querySelector('.prayer-time').textContent = prayers.Isha;
+                
+                // تحديد الصلاة الحالية التي عليها الدور
+                highlightCurrentPrayer(prayers);
+                
+                // جدولة الإشعارات للصلاة
+                schedulePrayerNotifications(prayers);
+                
+            } catch (error) {
+                console.error('حدث خطأ في جلب مواقيت الصلاة:', error);
+                // استخدام البيانات الافتراضية في حالة الخطأ
+                setDefaultPrayerTimes();
+            }
+        }
+        
+        // دالة لتحديد الصلاة الحالية التي عليها الدور
+        function highlightCurrentPrayer(prayers) {
+            // إزالة التنشيط من جميع البطاقات أولاً
+            document.querySelectorAll('.prayer-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            // تحويل أوقات الصلاة إلى دقائق
+            const prayerTimes = {
+                Fajr: convertTimeToMinutes(prayers.Fajr),
+                Sunrise: convertTimeToMinutes(prayers.Sunrise),
+                Dhuhr: convertTimeToMinutes(prayers.Dhuhr),
+                Asr: convertTimeToMinutes(prayers.Asr),
+                Maghrib: convertTimeToMinutes(prayers.Maghrib),
+                Isha: convertTimeToMinutes(prayers.Isha)
+            };
+            
+            // تحديد الصلاة الحالية التي عليها الدور
+            let currentPrayer = '';
+            
+            // الفجر: من وقت الفجر إلى الشروق
+            if (currentTime >= prayerTimes.Fajr && currentTime < prayerTimes.Sunrise) {
+                currentPrayer = 'Fajr';
+            } 
+            // الظهر: من وقت الظهر إلى العصر
+            else if (currentTime >= prayerTimes.Dhuhr && currentTime < prayerTimes.Asr) {
+                currentPrayer = 'Dhuhr';
+            } 
+            // العصر: من وقت العصر إلى المغرب
+            else if (currentTime >= prayerTimes.Asr && currentTime < prayerTimes.Maghrib) {
+                currentPrayer = 'Asr';
+            } 
+            // المغرب: من وقت المغرب إلى العشاء
+            else if (currentTime >= prayerTimes.Maghrib && currentTime < prayerTimes.Isha) {
+                currentPrayer = 'Maghrib';
+            } 
+            // العشاء: من وقت العشاء إلى الفجر
+            else if (currentTime >= prayerTimes.Isha || currentTime < prayerTimes.Fajr) {
+                currentPrayer = 'Isha';
+            }
+            
+            // تنشيط البطاقة المناسبة
+            const prayerCards = document.querySelectorAll('.prayer-card');
+            switch(currentPrayer) {
+                case 'Fajr':
+                    prayerCards[0].classList.add('active');
+                    break;
+                case 'Dhuhr':
+                    prayerCards[2].classList.add('active');
+                    break;
+                case 'Asr':
+                    prayerCards[3].classList.add('active');
+                    break;
+                case 'Maghrib':
+                    prayerCards[4].classList.add('active');
+                    break;
+                case 'Isha':
+                    prayerCards[5].classList.add('active');
+                    break;
+            }
+        }
+        
+        // دالة لجدولة إشعارات الصلاة
+        function schedulePrayerNotifications(prayers) {
+            // إلغاء أي مؤقتات سابقة
+            clearAllTimeouts();
+            
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            
+            // تحويل أوقات الصلاة إلى دقائق
+            const prayerTimes = {
+                Fajr: convertTimeToMinutes(prayers.Fajr),
+                Sunrise: convertTimeToMinutes(prayers.Sunrise),
+                Dhuhr: convertTimeToMinutes(prayers.Dhuhr),
+                Asr: convertTimeToMinutes(prayers.Asr),
+                Maghrib: convertTimeToMinutes(prayers.Maghrib),
+                Isha: convertTimeToMinutes(prayers.Isha)
+            };
+            
+            // جدولة إشعارات قبل كل صلاة بربع ساعة (15 دقيقة)
+            scheduleNotification('الفجر', prayerTimes.Fajr - 15, currentTime);
+            scheduleNotification('الظهر', prayerTimes.Dhuhr - 15, currentTime);
+            scheduleNotification('العصر', prayerTimes.Asr - 15, currentTime);
+            scheduleNotification('المغرب', prayerTimes.Maghrib - 15, currentTime);
+            scheduleNotification('العشاء', prayerTimes.Isha - 15, currentTime);
+        }
+        
+        // دالة لجدولة إشعار واحد
+        function scheduleNotification(prayerName, notificationTime, currentTime) {
+            // حساب الوقت المتبقي حتى الإشعار (بالمللي ثانية)
+            let timeUntilNotification = (notificationTime - currentTime) * 60 * 1000;
+            
+            // إذا كان وقت الإشعار قد مضى اليوم، نجدوله لليوم التالي
+            if (timeUntilNotification < 0) {
+                timeUntilNotification += 24 * 60 * 60 * 1000; // أضف 24 ساعة
+            }
+            
+            // جدولة الإشعار
+            notificationTimeouts.push(setTimeout(() => {
+                showNotification(`اقتربت صلاة ${prayerName}`, `باقي على صلاة ${prayerName} 15 دقيقة، استعد للصلاة`);
+                
+                // يمكنك هنا إضافة صوت للإشعار إذا أردت
+                // new Audio('notification-sound.mp3').play();
+                
+            }, timeUntilNotification));
+        }
+        
+        // مصفوفة لحفظ المؤقتات
+        let notificationTimeouts = [];
+        
+        // دالة لإلغاء جميع المؤقتات
+        function clearAllTimeouts() {
+            notificationTimeouts.forEach(timeout => clearTimeout(timeout));
+            notificationTimeouts = [];
+        }
+        
+        // دالة لعرض الإشعار
+        function showNotification(title, message) {
+            const notification = document.getElementById('prayerNotification');
+            document.getElementById('notificationTitle').textContent = title;
+            document.getElementById('notificationMessage').textContent = message;
+            
+            notification.style.display = 'block';
+            
+            // إخفاء الإشعار تلقائياً بعد 5 ثواني
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+        
+        // دالة لإغلاق الإشعار يدوياً
+        function closeNotification() {
+            document.getElementById('prayerNotification').style.display = 'none';
+        }
+        
+        // دالة لتحويل الوقت من نص إلى دقائق
+        function convertTimeToMinutes(timeStr) {
+            const [hours, minutes] = timeStr.split(':').map(Number);
+            return hours * 60 + minutes;
+        }
+        
+        // دالة للبيانات الافتراضية في حالة الخطأ
+        function setDefaultPrayerTimes() {
+            document.querySelectorAll('.prayer-card')[0].querySelector('.prayer-time').textContent = '03:45';
+            document.querySelectorAll('.prayer-card')[1].querySelector('.prayer-time').textContent = '05:19';
+            document.querySelectorAll('.prayer-card')[2].querySelector('.prayer-time').textContent = '11:54';
+            document.querySelectorAll('.prayer-card')[3].querySelector('.prayer-time').textContent = '15:31';
+            document.querySelectorAll('.prayer-card')[4].querySelector('.prayer-time').textContent = '18:30';
+            document.querySelectorAll('.prayer-card')[5].querySelector('.prayer-time').textContent = '19:53';
+            
+            highlightCurrentPrayer({
+                Fajr: '03:45',
+                Sunrise: '05:19',
+                Dhuhr: '11:54',
+                Asr: '15:31',
+                Maghrib: '18:30',
+                Isha: '19:53'
+            });
+            
+            // جدولة إشعارات للبيانات الافتراضية
+            schedulePrayerNotifications({
+                Fajr: '03:45',
+                Sunrise: '05:19',
+                Dhuhr: '11:54',
+                Asr: '15:31',
+                Maghrib: '18:30',
+                Isha: '19:53'
+            });
+        }
+        
+        // جلب البيانات عند تحميل الصفحة
+        window.addEventListener('DOMContentLoaded', fetchPrayerTimes);
+        
+        // تحديث البيانات كل دقيقة لمزيد من الدقة
+        setInterval(fetchPrayerTimes, 60000);
+    </script>
+</body>
+</html>
