@@ -241,63 +241,59 @@
                 <div class="prayer-time" id="maghrib">--:--</div>
             </div>
             <div class="prayer-card">
-                <div class="prayer-name">isha">العشاء</div>
+                <div class="prayer-name">العشاء</div>
                 <div class="prayer-time" id="isha">--:--</div>
             </div>
         </div>
         
         <div class="features">
-            <div class="feature-card">
+            <div class="feature-card" onclick="window.location.href='azkar.html?type=morning'">
+                <div class="feature-icon"><i class="fas fa-sun"></i></div>
+                <div class="feature-name">أذكار الصباح</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='masaa.html?type=evening'">
                 <div class="feature-icon"><i class="fas fa-moon"></i></div>
-                <div class="feature-name">التقويم الهجري</div>
+                <div class="feature-name">أذكار المساء</div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-kaaba"></i></div>
-                <div class="feature-name">اتجاه القبلة</div>
+            <div class="feature-card" onclick="window.location.href='noom.html?type=sleep'">
+                <div class="feature-icon"><i class="fas fa-bed"></i></div>
+                <div class="feature-name">أذكار النوم</div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-hands-praying"></i></div>
-                <div class="feature-name">أذكار المسلم</div>
+            <div class="feature-card" onclick="window.location.href='up.html?type=wakeup'">
+                <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                <div class="feature-name">أذكار الاستيقاظ</div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-book-quran"></i></div>
-                <div class="feature-name">القرآن الكريم</div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-mosque"></i></div>
-                <div class="feature-name">المساجد القريبة</div>
-            </div>
-            <div class="feature-card">
+            <div class="feature-card" onclick="window.location.href='salah.html?type=prayer'">
                 <div class="feature-icon"><i class="fas fa-pray"></i></div>
-                <div class="feature-name">تفسير الأحلام</div>
+                <div class="feature-name">أذكار بعد الصلاة</div>
+            </div>
+            <div class="feature-card" onclick="window.location.href='https://qiblafinder.withgoogle.com/intl/ar/onboarding'">
+                <div class="feature-icon"><i class="fas fa-compass"></i></div>
+                <div class="feature-name">اتجاه القبلة</div>
             </div>
         </div>
         
         <div class="bottom-nav">
-            <div class="nav-item">
-                <i class="fas fa-home nav-icon"></i>
-                <div class="nav-text">الرئيسية</div>
+            <div class="nav-item" onclick="window.location.href='share.html'">
+                <div class="nav-icon"><i class="fas fa-share-alt"></i></div>
+                <div class="nav-text">شارك التطبيق</div>
             </div>
-            <div class="nav-item">
-                <i class="fas fa-calendar-alt nav-icon"></i>
-                <div class="nav-text">التقويم</div>
+            <div class="nav-item" onclick="window.location.href='share.html'">
+                <div class="nav-icon"><i class="fas fa-cog"></i></div>
+                <div class="nav-text">الإعدادات</div>
             </div>
-            <div class="nav-item">
-                <i class="fas fa-compass nav-icon"></i>
-                <div class="nav-text">القبلة</div>
-            </div>
-            <div class="nav-item">
-                <i class="fas fa-book nav-icon"></i>
-                <div class="nav-text">القرآن</div>
+            <div class="nav-item" onclick="window.location.href='share.html'">
+                <div class="nav-icon"><i class="fas fa-info-circle"></i></div>
+                <div class="nav-text">عن التطبيق</div>
             </div>
         </div>
     </div>
     
-    <!-- الإشعار -->
+    <!-- عنصر الإشعار -->
     <div class="notification" id="prayerNotification">
-        <span class="notification-close" onclick="closeNotification()">✕</span>
-        <div class="notification-title" id="notificationTitle">اقتربت صلاة الفجر</div>
-        <div id="notificationMessage">باقي على صلاة الفجر 15 دقيقة، استعد للصلاة</div>
+        <span class="notification-close" onclick="closeNotification()">×</span>
+        <div class="notification-title" id="notificationTitle">إشعار الصلاة</div>
+        <div id="notificationMessage">اقتربت صلاة الفجر قبلها بربع ساعة</div>
     </div>
     
     <script>
